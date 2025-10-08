@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
     $confirm = $_POST['confirm_password'] ?? '';
-    $role = in_array($_POST['role'] ?? 'client', ['client','provider']) ? $_POST['role'] : 'client';
+    $role = $_POST['role'] ?? 'client';
     $phone = trim($_POST['phone'] ?? '');
     $location = trim($_POST['location'] ?? '');
 
@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Valid email required.';
     if (strlen($password) < 8) $errors[] = 'Password must be at least 8 characters.';
     if ($password !== $confirm) $errors[] = 'Passwords do not match.';
+    if (!in_array($role, ['client', 'provider', 'admin'])) $errors[] = 'Invalid role selected.';
 
     if (empty($errors)) {
         // Check email uniqueness
@@ -33,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->execute([$full_name, $email, $hash, $role, $phone, $location]);
             $uid = $pdo->lastInsertId();
 
-            // If provider role, create providers row placeholder
+            // If provider, create a placeholder profile
             if ($role === 'provider') {
                 $stmt = $pdo->prepare("INSERT INTO providers (user_id) VALUES (?)");
                 $stmt->execute([$uid]);
@@ -50,14 +51,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="utf-8" />
   <title>SkillConnect — Register</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <!-- DaisyUI / Tailwind via CDN (development) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>
 <body class="bg-base-200 min-h-screen flex items-center justify-center">
-  <div class="card w-full max-w-xl shadow-xl">
+  <div class="card w-full max-w-xl shadow-xl bg-base-100">
     <div class="card-body">
-      <h2 class="card-title">Create an account — SkillConnect</h2>
+      <h2 class="card-title">Create an Account — SkillConnect</h2>
 
       <?php if ($errors): ?>
         <div class="alert alert-error">
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <form method="post" class="space-y-4">
         <div>
-          <label class="label"><span class="label-text">Full name</span></label>
+          <label class="label"><span class="label-text">Full Name</span></label>
           <input type="text" name="full_name" value="<?=htmlspecialchars($_POST['full_name'] ?? '')?>" class="input input-bordered w-full" required>
         </div>
 
@@ -109,9 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <select name="role" class="select select-bordered w-full">
             <option value="client" <?= (($_POST['role'] ?? '') === 'client') ? 'selected' : '' ?>>Client (Hire)</option>
             <option value="provider" <?= (($_POST['role'] ?? '') === 'provider') ? 'selected' : '' ?>>Provider (Work)</option>
-            if (isset($_GET['key']) && $_GET['key'] === 'letmein') {
-    echo '<option value="admin">Administrator</option>';
-}
+            <option value="admin" <?= (($_POST['role'] ?? '') === 'admin') ? 'selected' : '' ?>>Administrator</option>
           </select>
         </div>
 
