@@ -15,13 +15,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         $stmt = $pdo->prepare("SELECT id, full_name, password, role FROM users WHERE email = ?");
         $stmt->execute([$email]);
-        $user = $stmt->fetch();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
         if ($user && password_verify($password, $user['password'])) {
-            // Successful
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['full_name'];
             $_SESSION['role'] = $user['role'];
-            header('Location: dashboard.php');
+
+            // Redirect based on user role
+            switch ($user['role']) {
+                case 'admin':
+                    header('Location: admin_dashboard.php');
+                    break;
+                case 'client':
+                    header('Location: dashboard.php');
+                    break;
+                case 'provider':
+                    header('Location: dashboard.php');
+                    break;
+                default:
+                    header('Location: index.php'); // fallback
+            }
             exit;
         } else {
             $errors[] = 'Invalid credentials.';
@@ -33,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
   <meta charset="utf-8">
-  <title>SkillBridge — Login</title>
+  <title>SkillConnect — Login</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">

@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>SkillBridge — Register</title>
+  <title>SkillConnect — Register</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <!-- DaisyUI / Tailwind via CDN (development) -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-base-200 min-h-screen flex items-center justify-center">
   <div class="card w-full max-w-xl shadow-xl">
     <div class="card-body">
-      <h2 class="card-title">Create an account — SkillBridge</h2>
+      <h2 class="card-title">Create an account — SkillConnect</h2>
 
       <?php if ($errors): ?>
         <div class="alert alert-error">

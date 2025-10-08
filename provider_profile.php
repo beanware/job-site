@@ -56,13 +56,13 @@ $provider = $stmt->fetch();
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>SkillBridge — Provider Profile</title>
+  <title>SkillConnect — Provider Profile</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>
 <body class="bg-base-200 min-h-screen">
   <div class="navbar bg-base-100 shadow">
-    <a class="btn btn-ghost text-xl">SkillBridge</a>
+    <a class="btn btn-ghost text-xl">SkillConnect</a>
     <div class="flex-1"></div>
     <a class="btn btn-outline" href="dashboard.php">Dashboard</a>
     <a class="btn btn-error ml-2" href="logout.php">Logout</a>

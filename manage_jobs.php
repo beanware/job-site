@@ -32,13 +32,13 @@ $jobs = $stmt->fetchAll();
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Manage Jobs — SkillBridge</title>
+  <title>Manage Jobs — SkillConnect</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>
 <body class="bg-base-200 min-h-screen">
   <div class="navbar bg-base-100 shadow">
-    <a class="btn btn-ghost text-xl">SkillBridge</a>
+    <a class="btn btn-ghost text-xl">SkillConnect</a>
     <div class="flex-1"></div>
     <a href="dashboard.php" class="btn btn-outline">Dashboard</a>
     <a href="logout.php" class="btn btn-error ml-2">Logout</a>

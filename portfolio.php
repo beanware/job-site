@@ -30,7 +30,7 @@ $reviews = $stmt->fetchAll();
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Provider Portfolio — SkillBridge</title>
+  <title>Provider Portfolio — SkillConnect</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>

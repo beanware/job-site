@@ -33,13 +33,13 @@ $rows = $stmt->fetchAll();
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Admin Verification Panel — SkillBridge</title>
+  <title>Admin Verification Panel — SkillConnect</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@2.51.5/dist/full.css" rel="stylesheet">
 </head>
 <body class="bg-base-200 min-h-screen">
   <div class="navbar bg-base-100 shadow">
-    <a class="btn btn-ghost text-xl">SkillBridge Admin</a>
+    <a class="btn btn-ghost text-xl">SkillConnect Admin</a>
     <div class="flex-1"></div>
     <a class="btn btn-outline" href="logout.php">Logout</a>
   </div>
